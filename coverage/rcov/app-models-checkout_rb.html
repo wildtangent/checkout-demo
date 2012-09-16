@@ -25,17 +25,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-checkout_rb.html">app/models/checkout.rb</a></td>
-            <td class='right_align'><tt>18</tt></td>
-            <td class='right_align'><tt>8</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>83.33%</tt></div>
+            <td class='right_align'><tt>26</tt></td>
+            <td class='right_align'><tt>11</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
-        <div class="covered" style="width:83px"></div>
-        <div class="uncovered" style="width:17px"></div>
+        <div class="covered" style="width:100px"></div>
+        <div class="uncovered" style="width:0px"></div>
       </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>62.50%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
-        <div class="covered" style="width:63px"></div>
-        <div class="uncovered" style="width:37px"></div>
+        <div class="covered" style="width:100px"></div>
+        <div class="uncovered" style="width:0px"></div>
       </div></td>
           </tr>
         </tbody>
@@ -62,52 +62,76 @@
         <tr class="inferred">
           <td><pre><a name="line5">5</a>   </pre></td>
         </tr>
-        <tr class="marked">
-          <td><pre><a name="line6">6</a>   def initialize(pricing_rules)</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line7">7</a>     @pricing_rules = pricing_rules</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line8">8</a>     @items = []</pre></td>
-        </tr>
         <tr class="inferred">
-          <td><pre><a name="line9">9</a>   end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line10">10</a>   </pre></td>
+          <td><pre><a name="line6">6</a>   # Initialize the checkout, items and rules</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line11">11</a>   def scan(item)</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line12">12</a>     @items &lt;&lt; item</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line13">13</a>   end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line14">14</a>   </pre></td>
+          <td><pre><a name="line7">7</a>   def initialize(pricing_rules)</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line15">15</a>   def total</pre></td>
+          <td><pre><a name="line8">8</a>     @pricing_rules = pricing_rules</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line9">9</a>     @items = []</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line16">16</a>     #boom</pre></td>
+          <td><pre><a name="line10">10</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line17">17</a>   end</pre></td>
+          <td><pre><a name="line11">11</a>   </pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line18">18</a>   </pre></td>
+          <td><pre><a name="line12">12</a>   # Add an item to the checkout</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line13">13</a>   def scan(item)</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line14">14</a>     @items &lt;&lt; item</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line19">19</a> end</pre></td>
+          <td><pre><a name="line15">15</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line16">16</a>   </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line17">17</a>   # Return the total as floating point</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line18">18</a>   def total</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line19">19</a>     (sum.to_f / 100).to_f</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line20">20</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line21">21</a>   </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line22">22</a>   # Get the prices and add them together</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line23">23</a>   def sum</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line24">24</a>     @items.map(&amp;:price).inject(:+)    </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line25">25</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line26">26</a>   </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line27">27</a> end</pre></td>
         </tr>
       </tbody>
     </table>
 
-    <p>Generated on 2012-09-16 21:10:03 +0100 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+    <p>Generated on 2012-09-16 21:24:57 +0100 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
 
   </body>
 </html>

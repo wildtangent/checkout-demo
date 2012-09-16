@@ -17,5 +17,4 @@ describe Product do
     @product.price.should == 311
   end
   
-  
 end
