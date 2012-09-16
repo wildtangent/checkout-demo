@@ -25,8 +25,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-checkout_rb.html">app/models/checkout.rb</a></td>
-            <td class='right_align'><tt>26</tt></td>
-            <td class='right_align'><tt>11</tt></td>
+            <td class='right_align'><tt>35</tt></td>
+            <td class='right_align'><tt>15</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
         <div class="covered" style="width:100px"></div>
@@ -102,7 +102,7 @@
           <td><pre><a name="line18">18</a>   def total</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line19">19</a>     (sum.to_f / 100).to_f</pre></td>
+          <td><pre><a name="line19">19</a>     ((apply_rules(sum)).to_f / 100).to_f</pre></td>
         </tr>
         <tr class="inferred">
           <td><pre><a name="line20">20</a>   end</pre></td>
@@ -117,7 +117,7 @@
           <td><pre><a name="line23">23</a>   def sum</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line24">24</a>     @items.map(&amp;:price).inject(:+)    </pre></td>
+          <td><pre><a name="line24">24</a>     @items.map(&amp;:price).reduce(:+)    </pre></td>
         </tr>
         <tr class="inferred">
           <td><pre><a name="line25">25</a>   end</pre></td>
@@ -126,12 +126,39 @@
           <td><pre><a name="line26">26</a>   </pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line27">27</a> end</pre></td>
+          <td><pre><a name="line27">27</a>   # Apply available pricing rules</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line28">28</a>   def apply_rules(value)</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line29">29</a>     @pricing_rules.each do |rule|</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line30">30</a>       value -= rule.total_discount(@items)</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line31">31</a>     end</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line32">32</a>     value</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line33">33</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line34">34</a>     </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line35">35</a>   </pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line36">36</a> end</pre></td>
         </tr>
       </tbody>
     </table>
 
-    <p>Generated on 2012-09-16 21:24:57 +0100 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+    <p>Generated on 2012-09-16 23:02:47 +0100 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
 
   </body>
 </html>

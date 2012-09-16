@@ -7,27 +7,34 @@ describe Checkout do
     @strawberries = FactoryGirl.build(:strawberries)
     @coffee = FactoryGirl.build(:coffee)    
 
-    pricing_rules = []
+    pricing_rules = [
+      FactoryGirl.build(:multibuy_discount),
+      FactoryGirl.build(:bogof_discount)
+    ]
     @checkout = Checkout.new(pricing_rules)
   end
   
-  it 'should return a value of 22.25' do
-    scan_items(@fruit_tea, @strawberries, @fruit_tea, @coffee)
-    @checkout.total.should == "22.25"
+  it 'should NOT return a value of 22.25' do
+    scan_items(@fruit_tea, @strawberries, @fruit_tea.dup, @coffee)
+    @checkout.total.should_not == 22.25
+  end
+  
+  it 'should really return a value of 19.34' do
+    scan_items(@fruit_tea, @strawberries, @fruit_tea.dup, @coffee)
+    @checkout.total.should == 19.34
   end
   
   it 'should return a value of 3.11' do
     scan_items(@fruit_tea, @fruit_tea)
-    @checkout.total.should == "3.11"
+    @checkout.total.should == 3.11
   end
   
   it 'should return a value of 16.61' do
-    scan_items(@strawberries, @strawberries, @fruit_tea, @strawberries)
-    
-    
-    @checkout.total.should == "16.61"
+    scan_items(@strawberries.dup, @strawberries.dup, @fruit_tea, @strawberries.dup)
+    @checkout.total.should == 16.61
   end
   
+  # Helper to put items through the checkout
   def scan_items(*items)
     items.each do |item|
       @checkout.scan(item)

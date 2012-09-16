@@ -15,12 +15,21 @@ class Checkout
   
   # Return the total as floating point
   def total
-    (sum.to_f / 100).to_f
+    ((apply_rules(sum)).to_f / 100).to_f
   end
   
   # Get the prices and add them together
   def sum
-    @items.map(&:price).inject(:+)    
+    @items.map(&:price).reduce(:+)    
   end
+  
+  # Apply available pricing rules
+  def apply_rules(value)
+    @pricing_rules.each do |rule|
+      value -= rule.total_discount(@items)
+    end
+    value
+  end
+    
   
 end
