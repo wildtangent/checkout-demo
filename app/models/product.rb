@@ -6,7 +6,6 @@ class Product
     @product_code = attributes[:product_code]
     @name = attributes[:name]
     @price = attributes[:price]
-    @reduction = 0
   end
   
 end
