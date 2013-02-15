@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
