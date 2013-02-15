@@ -26,9 +26,14 @@ describe Checkout do
   end
   
   
-  it 'should NOT return a value of 22.25' do
+  it 'should NOT return a value of 22.25 (as specified)' do
     scan_items(fruit_tea, strawberries, fruit_tea, coffee)
     checkout.total.should_not == 22.25
+  end
+  
+  it 'should NOT return a value of 22.45 (full price of all items)' do
+    scan_items(fruit_tea, strawberries, fruit_tea, coffee)
+    checkout.total.should_not == 22.45
   end
   
   it 'should really return a value of 19.34 ((311+311+500+1123) - 311).to_f' do
