@@ -1,9 +1,9 @@
-Checkout Example
+# Checkout Example
 
-Please bundle necessary gems and run the specs using RSpec
-
-Coverage report will be built in ./coverage/rspec/index.html
-
-bundle install
-
-bundle exec rspec .
+To run the Checkout app  
+```
+git clone git@github.com:wildtangent/checkout-demo.git
+cd checkout-demo
+bundle
+rake spec
+```
