@@ -2,7 +2,7 @@
 
 To run the Checkout app  
 ```
-git clone git@github.com:wildtangent/checkout-demo.git
+git clone git://github.com/wildtangent/checkout-demo.git
 cd checkout-demo
 bundle
 rake spec
