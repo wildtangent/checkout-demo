@@ -1,10 +1,25 @@
 require 'spec_helper'
 
 describe PricingRule do
+
+  let :fruit_tea do
+    FactoryGirl.build(:fruit_tea)
+  end
+  
+  let :strawberries do
+    FactoryGirl.build(:strawberries)
+  end
+  
+  let :pricing_rule do
+    FactoryGirl.build(:pricing_rule)
+  end
+  
+  let :fruit_tea_pricing_rule do
+    FactoryGirl.build(:pricing_rule, product_codes: ["FR1"])
+  end
   
   it 'should assign a product code of ["FR1"]' do
-    @pricing_rule = FactoryGirl.build(:pricing_rule, product_codes: ["FR1"])
-    @pricing_rule.product_codes.should == ["FR1"]
+    fruit_tea_pricing_rule.product_codes.should == ["FR1"]
   end
   
   it 'should assign a discount of 50 if initialized with that attribute' do
@@ -18,25 +33,19 @@ describe PricingRule do
   end
   
   it 'should return true if the item is eligible' do
-    @pricing_rule = FactoryGirl.build(:pricing_rule, product_codes: ['FR1'])
-    @item = FactoryGirl.build(:fruit_tea)
-    @pricing_rule.eligible?(@item).should be_true
+    fruit_tea_pricing_rule.eligible?(fruit_tea).should be_true
   end
   
   it 'should return false if the item is not eligible' do
-    @pricing_rule = FactoryGirl.build(:pricing_rule, product_codes: ['FR1'])
-    @item = FactoryGirl.build(:strawberries)
-    @pricing_rule.eligible?(@item).should be_false
+    fruit_tea_pricing_rule.eligible?(strawberries).should be_false
   end
   
   it 'should return a discount of 0' do
-    @pricing_rule = FactoryGirl.build(:pricing_rule)
-    @pricing_rule.total_discount([]).should == 0
+    pricing_rule.total_discount([]).should == 0
   end
   
   it 'should return a discount of 0 on two fruit teas, if no discount rule is applied' do
-    @pricing_rule = FactoryGirl.build(:pricing_rule)
-    @pricing_rule.total_discount([FactoryGirl.build(:fruit_tea), FactoryGirl.build(:fruit_tea)]).should == 0
+    pricing_rule.total_discount([fruit_tea, fruit_tea]).should == 0
   end
   
 end
